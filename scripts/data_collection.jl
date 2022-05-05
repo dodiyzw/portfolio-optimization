@@ -20,7 +20,8 @@ function price_week_month(tickers, ;interval::String = "weekly_adjusted")
     @argcheck in(interval, ["weekly_adjusted", "monthly_adjusted", "annual_adjusted"])
     if interval == "weekly_adjusted"
         df = @. DataFrame(time_series_weekly_adjusted(tickers, outputsize = "full")) #broadcast over all function
-        price = [df[i][:,"adjusted close"] for i=1:length(df)]
+        #if they have different length (listed at different time), then take the shortest available
+        price = [df[i][1:minimum(nrow.(df)),"adjusted close"] for i=1:length(df)]
         m = hcat(price...)
         returns = each_returns(m)
         returns_mat = reduce(hcat,returns)'
@@ -28,7 +29,7 @@ function price_week_month(tickers, ;interval::String = "weekly_adjusted")
     
     elseif interval == "monthly_adjusted"
         df = @. DataFrame(time_series_monthly_adjusted(tickers, outputsize = "full")) #broadcast over all function
-        price = [df[i][:,"adjusted close"] for i=1:length(df)]
+        price = [df[i][1:minimum(nrow.(df)),"adjusted close"] for i=1:length(df)]
         m = hcat(price...)
         returns = each_returns(m)
         returns_mat = reduce(hcat,returns)'
@@ -67,3 +68,25 @@ for l in ls
         save_object("../data/$(string)_annually.jld2", res)
     end
 end 
+
+
+#collection of "growth" stock 
+tick1 = ["FB", "TSLA", "NFLX"]
+tick2 = ["FB", "TSLA", "NFLX", "GOOG"]
+tick3 = ["FB", "TSLA", "NFLX", "GOOG", "SE", "CRWD", "TDOC"]
+tick4 = ["FB", "TSLA", "NFLX", "GOOG", "SE", "CRWD", "TDOC", "ZM", "SQ"]
+tick5 = ["FB", "TSLA", "NFLX", "GOOG", "SE", "CRWD", "TDOC", "ZM", "SQ", "MRNA", "CRSP"]
+ls = [tick1, tick2, tick3, tick4, tick5]
+#for growth stocks, we are not performing annual analysis
+for l in ls
+    string = join(l, "_")
+    if (!isfile("../data/$(string)_weekly.jld2"))
+        res = price_week_month(l)
+        save_object("../data/$(string)_weekly.jld2", res)
+    end
+    if (!isfile("../data/$(string)_monthly.jld2"))
+        res = price_week_month(l, interval =  "monthly_adjusted")
+        save_object("../data/$(string)_monthly.jld2", res)
+    end
+end 
+
