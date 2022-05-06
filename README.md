@@ -1,2 +1,2 @@
 # portfolio-optimization
-using mean-variance optimization to optimize stock portfolio
+This project is a first attempt at using mean-variance optimization to optimize stock portfolio. 
