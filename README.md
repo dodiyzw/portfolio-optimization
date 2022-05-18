@@ -1,7 +1,7 @@
 # portfolio-optimization using MVO
 This project is a first attempt at using mean-variance optimization to optimize stock portfolio. 
 
-This project hence interested in learning to optimize the risk and return associated with stocks in a portfolio. This project aims to **1) produce a portfolio that minimizes risk and 2) find the weightage of stock combinations that has the lowest risk** for a specific return rate in mind. 
+This project is interested in learning to optimize the risk and return associated with stocks in a portfolio. This project aims to **1) produce a portfolio that minimizes risk and 2) find the weightage of stock combinations that has the lowest risk** for a specific return rate in mind. 
 
 First, this project uses the Mean-Variance Portfolio (MVO) Theory to find the stock weightage of a portfolio that minimizes risk for a specific **annual** return rate. This is studied using blue-chip stocks in the US markets that has been listed on the stock market since 1990s so that there is sufficient data to perform Mean-Variance Optimization. 
 
