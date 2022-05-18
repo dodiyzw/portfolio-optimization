@@ -21,9 +21,13 @@ The optimization used is as follow, where the variance (risk) is minimized
 subjected to 
 <p align="center"><img src="https://render.githubusercontent.com/render/math?math=\large\ ux \geq R"> </p>
 <p align="center"><img src="https://render.githubusercontent.com/render/math?math=\large\ \Sigma x_{i} = 1"> </p>
-![plot](../main/output/AAPL_SBUX_MCD_NKE_KO_DIS_MSFT_XOM_PFE_PG_JNJbar__annual.jpg)
-![plot1](https://github.com/dodiyzw/portfolio-optimization/blob/main/output/AAPL_SBUX_MCD_NKE_KO_DIS_MSFT_XOM_PFE_PG_JNJbar__annual.jpg)
+
 where $x_{i}$ refers to weightage of the each stocks in the portfolio, $Q$ refers to the covariance of the stocks in the portfolio, and $R$ refers to the desired return rate from the portfolio. $u$ refers to the mean return of stocks. 
+
+### Example of portfolio allocation for different expected annual return 
+<p>
+    <img src="output/AAPL_SBUX_MCD_NKE_KO_DIS_MSFT_XOM_PFE_PG_JNJbar__annual.jpg?raw=true" width="800" height="600" />
+</p>
 
 ### Limitation 
 1) the portfolio in this project **does not combine high growth and blue chip stocks into the same portfolio, making the individual portfolio rather small**
